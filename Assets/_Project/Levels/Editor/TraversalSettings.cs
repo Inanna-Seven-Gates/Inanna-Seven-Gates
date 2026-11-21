@@ -30,6 +30,8 @@ namespace Inanna.Levels.EditorTools
 
         public LayerMask GroundMask;
         public LayerMask ObstacleMask;
+        /// <summary>Layer Enemy: só bloqueia o que não é inimigo (alavanca, parede falsa).</summary>
+        public LayerMask EnemyLayerMask;
         public LayerMask LineOfSightMask;
 
         public float EyeHeight => AgentHeight * 0.5f;
@@ -41,6 +43,7 @@ namespace Inanna.Levels.EditorTools
                 GroundMask = LayerMask.GetMask("Ground"),
                 // Inimigos não contam como obstáculo: o validador assume que eles foram derrotados.
                 ObstacleMask = ~LayerMask.GetMask("Player", "Enemy"),
+                EnemyLayerMask = LayerMask.GetMask("Enemy"),
                 LineOfSightMask = ~LayerMask.GetMask("Player", "Enemy", "Ignore Raycast"),
             };
 

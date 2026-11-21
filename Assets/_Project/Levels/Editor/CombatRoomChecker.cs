@@ -16,20 +16,23 @@ namespace Inanna.Levels.EditorTools
         /// <summary>Folga para a grade e a espessura da parede na checagem de "a sala fecha".</summary>
         const float LeakMargin = 1f;
 
-        public static void Check(TraversalGrid grid, IReadOnlyList<Vector3> routePath, IReadOnlyList<DamageSwitch> switches,
-            TraversalSettings settings, TraversalReport report)
+        public static void Check(TraversalGrid grid, IReadOnlyList<Vector3> routePath, TraversalSettings settings, TraversalReport report)
         {
             foreach (var room in Object.FindObjectsByType<CombatRoom>(FindObjectsSortMode.None).OrderBy(r => r.name))
-                CheckRoom(grid, routePath, switches, settings, report, room);
+                CheckRoom(grid, routePath, settings, report, room);
             grid.Rebuild();
         }
 
-        static void CheckRoom(TraversalGrid grid, IReadOnlyList<Vector3> routePath, IReadOnlyList<DamageSwitch> switches,
-            TraversalSettings settings, TraversalReport report, CombatRoom room)
+        static void CheckRoom(TraversalGrid grid, IReadOnlyList<Vector3> routePath, TraversalSettings settings, TraversalReport report, CombatRoom room)
         {
             var gates = room.Gates.ToList();
             var enemies = FindEnemies(room, settings);
             if (gates.Count == 0) report.AddWarning($"'{room.name}' não tem passagens (ILockable): a sala não tranca.");
+            if (!room.StartsOnPlayerEnter && enemies.Count == 0)
+            {
+                report.AddStep($"'{room.name}' começa por evento (ex.: altar) e a onda nasce na hora: confira no playtest.");
+                return;
+            }
             if (enemies.Count == 0)
             {
                 report.AddWarning($"'{room.name}' não tem inimigos marcados: a sala não vai trancar.");
@@ -37,7 +40,7 @@ namespace Inanna.Levels.EditorTools
             }
             if (!TryFindEntryCell(grid, routePath, room, out int entry))
             {
-                report.AddWarning($"'{room.name}': a rota não passa pela área do trigger, então a sala nunca tranca.");
+                report.AddWarning($"'{room.name}': não achei chão andável dentro do trigger.");
                 return;
             }
 
@@ -52,7 +55,7 @@ namespace Inanna.Levels.EditorTools
                 {
                     reach = grid.Explore(entry);
                     unreachable = enemies.Where(enemy => !CanDefeat(grid, reach, enemy, settings, out _)).Select(enemy => enemy.name).ToList();
-                    if (unreachable.Count == 0 || !SwitchSolver.TryActivateReachableSwitch(grid, reach, switches, settings, report)) break;
+                    if (unreachable.Count == 0 || !SwitchSolver.TryProgress(grid, reach, settings, report)) break;
                     grid.Rebuild();
                 }
 
@@ -121,7 +124,10 @@ namespace Inanna.Levels.EditorTools
                 .ToList();
         }
 
-        /// <summary>Onde a rota entra no trigger: é dali que o jogador fica trancado.</summary>
+        /// <summary>
+        /// Onde a rota entra no trigger: é dali que o jogador fica trancado. Sala fora da rota (opcional):
+        /// a célula andável mais perto do centro do trigger.
+        /// </summary>
         static bool TryFindEntryCell(TraversalGrid grid, IReadOnlyList<Vector3> routePath, CombatRoom room, out int entry)
         {
             entry = -1;
@@ -132,7 +138,15 @@ namespace Inanna.Levels.EditorTools
                 entry = grid.WalkableCellsAround(point, 0.5f).DefaultIfEmpty(-1).First();
                 if (entry != -1) return true;
             }
-            return false;
+
+            float radius = Mathf.Max(trigger.extents.x, trigger.extents.z);
+            entry = grid.WalkableCellsAround(trigger.center, radius)
+                .Where(cell => TraversalQueries.ContainsHorizontally(trigger, grid.FeetPosition(cell), 0f)
+                    && Mathf.Abs(grid.FeetPosition(cell).y - (trigger.min.y)) < 1f)
+                .OrderBy(cell => (grid.FeetPosition(cell) - trigger.center).sqrMagnitude)
+                .DefaultIfEmpty(-1)
+                .First();
+            return entry != -1;
         }
     }
 }

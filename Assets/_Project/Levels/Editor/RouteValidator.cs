@@ -28,13 +28,12 @@ namespace Inanna.Levels.EditorTools
         public static TraversalReport Validate(LevelRoute route, TraversalSettings settings, bool walkWithController)
         {
             var report = new TraversalReport(route.gameObject.scene.name);
-            var switches = Object.FindObjectsByType<DamageSwitch>(FindObjectsSortMode.None);
-            var snapshot = ActivationSnapshot.Capture(switches);
+            var snapshot = SceneStateSnapshot.Capture();
             try
             {
                 var grid = new TraversalGrid(LevelBounds(settings), settings);
                 grid.Rebuild();
-                SolveRoute(route, settings, grid, switches, report);
+                SolveRoute(route, settings, grid, report);
                 if (!report.Passed) return report;
 
                 if (walkWithController) WalkWithController(report);
@@ -42,7 +41,7 @@ namespace Inanna.Levels.EditorTools
                 // As salas trancadas são conferidas no estado em que o jogador chega (gatilhos ainda não acionados).
                 snapshot.Restore();
                 grid.Rebuild();
-                CombatRoomChecker.Check(grid, report.Path, switches, settings, report);
+                CombatRoomChecker.Check(grid, report.Path, settings, report);
             }
             finally
             {
@@ -51,7 +50,7 @@ namespace Inanna.Levels.EditorTools
             return report;
         }
 
-        static void SolveRoute(LevelRoute route, TraversalSettings settings, TraversalGrid grid, DamageSwitch[] switches, TraversalReport report)
+        static void SolveRoute(LevelRoute route, TraversalSettings settings, TraversalGrid grid, TraversalReport report)
         {
             if (route.StartPoint == null)
             {
@@ -87,10 +86,11 @@ namespace Inanna.Levels.EditorTools
                         report.Path.AddRange(leg);
                         report.AddStep($"OK  {waypoint.name}");
                         current = arrival;
+                        if (SwitchSolver.CollectKeysNear(grid.FeetPosition(arrival), route.ArrivalRadius + 0.5f, report)) grid.Rebuild();
                         break;
                     }
 
-                    if (SwitchSolver.TryActivateReachableSwitch(grid, reach, switches, settings, report))
+                    if (SwitchSolver.TryProgress(grid, reach, settings, report))
                     {
                         grid.Rebuild();
                         continue;
@@ -221,28 +221,31 @@ namespace Inanna.Levels.EditorTools
             return bounds;
         }
 
-        /// <summary>Guarda o estado dos gatilhos e dos alvos para devolver a cena como estava.</summary>
-        sealed class ActivationSnapshot
+        /// <summary>Guarda o estado de interruptores, alvos e passagens para devolver a cena como estava.</summary>
+        sealed class SceneStateSnapshot
         {
-            readonly List<(DamageSwitch damageSwitch, bool activated)> _switches = new List<(DamageSwitch, bool)>();
-            readonly List<(IActivatable target, bool activated)> _targets = new List<(IActivatable, bool)>();
+            readonly List<(ISwitch item, bool activated)> _switches = new List<(ISwitch, bool)>();
+            readonly List<(IActivatable item, bool activated)> _activatables = new List<(IActivatable, bool)>();
+            readonly List<(ILockable item, bool locked)> _lockables = new List<(ILockable, bool)>();
 
-            public static ActivationSnapshot Capture(IEnumerable<DamageSwitch> switches)
+            public static SceneStateSnapshot Capture()
             {
-                var snapshot = new ActivationSnapshot();
-                foreach (var damageSwitch in switches)
+                var snapshot = new SceneStateSnapshot();
+                foreach (var behaviour in Object.FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None))
                 {
-                    snapshot._switches.Add((damageSwitch, damageSwitch.IsActivated));
-                    foreach (var target in damageSwitch.Targets)
-                        snapshot._targets.Add((target, target.IsActivated));
+                    if (behaviour is ISwitch item) snapshot._switches.Add((item, item.IsActivated));
+                    if (behaviour is IActivatable activatable) snapshot._activatables.Add((activatable, activatable.IsActivated));
+                    if (behaviour is ILockable lockable) snapshot._lockables.Add((lockable, lockable.IsLocked));
                 }
                 return snapshot;
             }
 
             public void Restore()
             {
-                foreach (var (damageSwitch, activated) in _switches) damageSwitch.SetActivatedImmediate(activated);
-                foreach (var (target, activated) in _targets) target.SetActivatedImmediate(activated);
+                foreach (var (item, activated) in _switches) item.SetActivatedImmediate(activated);
+                foreach (var (item, activated) in _activatables) item.SetActivatedImmediate(activated);
+                foreach (var gate in Object.FindObjectsByType<SwitchGate>(FindObjectsSortMode.None)) gate.EvaluateImmediate();
+                foreach (var (item, locked) in _lockables) item.SetLockedImmediate(locked);
                 Physics.SyncTransforms();
             }
         }

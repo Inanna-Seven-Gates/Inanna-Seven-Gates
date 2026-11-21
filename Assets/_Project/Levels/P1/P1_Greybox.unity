@@ -9678,6 +9678,7 @@ MonoBehaviour:
   gates:
   - {fileID: 466360969}
   - {fileID: 511721002}
+  startOnPlayerEnter: 1
   roomMargin: 1.5
   playerMask:
     serializedVersion: 2
@@ -14796,6 +14797,7 @@ MonoBehaviour:
   targets:
   - {fileID: 1144279518}
   minimumDamage: 0.01
+  rangedOnly: 1
   onActivated:
     m_PersistentCalls:
       m_Calls: []
@@ -16316,6 +16318,7 @@ MonoBehaviour:
   gates:
   - {fileID: 1939346028}
   - {fileID: 121869089}
+  startOnPlayerEnter: 1
   roomMargin: 1.5
   playerMask:
     serializedVersion: 2
@@ -16403,6 +16406,7 @@ MonoBehaviour:
   gates:
   - {fileID: 192895850}
   - {fileID: 1110331552}
+  startOnPlayerEnter: 1
   roomMargin: 1.5
   playerMask:
     serializedVersion: 2
@@ -25554,6 +25558,7 @@ MonoBehaviour:
   - {fileID: 223779417}
   - {fileID: 1030433868}
   - {fileID: 882084546}
+  startOnPlayerEnter: 1
   roomMargin: 1.5
   playerMask:
     serializedVersion: 2

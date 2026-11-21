@@ -22,6 +22,8 @@ namespace Inanna.Levels
 
         [Tooltip("Componentes que implementam ILockable (ex.: RoomGate) nas passagens da sala.")]
         [SerializeField] MonoBehaviour[] gates = Array.Empty<MonoBehaviour>();
+        [Tooltip("Desligado: a sala só começa por BeginEncounter (ex.: a raid da P2 começa pelo KeyAltar).")]
+        [SerializeField] bool startOnPlayerEnter = true;
         [Tooltip("Quanto a sala vai além do trigger, em cada lado (x e z). A busca por inimigos usa a sala inteira.")]
         [SerializeField, Min(0f)] float roomMargin = 1.5f;
         [SerializeField] LayerMask playerMask;
@@ -63,6 +65,7 @@ namespace Inanna.Levels
         }
 
         public bool IsCleared => _state == State.Cleared;
+        public bool StartsOnPlayerEnter => startOnPlayerEnter;
 
         BoxCollider Trigger => _trigger ? _trigger : _trigger = GetComponent<BoxCollider>();
 
@@ -77,11 +80,18 @@ namespace Inanna.Levels
 
         void OnTriggerEnter(Collider other)
         {
-            if (_state != State.Waiting || (playerMask.value & (1 << other.gameObject.layer)) == 0) return;
-            StartCoroutine(BeginEncounter());
+            if (!startOnPlayerEnter || (playerMask.value & (1 << other.gameObject.layer)) == 0) return;
+            BeginEncounter();
         }
 
-        IEnumerator BeginEncounter()
+        /// <summary>Começa o encontro (tranca, espera os inimigos morrerem, destranca). Só roda uma vez.</summary>
+        public void BeginEncounter()
+        {
+            if (_state != State.Waiting) return;
+            StartCoroutine(RunEncounter());
+        }
+
+        IEnumerator RunEncounter()
         {
             _state = State.Locked;
             onPlayerEntered.Invoke();

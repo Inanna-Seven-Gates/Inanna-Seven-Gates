@@ -20,8 +20,19 @@ namespace Inanna.Levels
 
         Collider _barsCollider;
         Coroutine _moving;
+        bool _stateApplied;
+        bool _locked;
 
-        public bool IsLocked { get; private set; }
+        // Antes do primeiro SetLockedImmediate (no Editor o Awake não roda), vale o estado inicial configurado.
+        public bool IsLocked
+        {
+            get => _stateApplied ? _locked : startLocked;
+            private set
+            {
+                _stateApplied = true;
+                _locked = value;
+            }
+        }
 
         void Awake()
         {

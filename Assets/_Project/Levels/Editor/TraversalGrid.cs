@@ -240,13 +240,22 @@ namespace Inanna.Levels.EditorTools
             return false;
         }
 
+        static readonly Collider[] EnemyLayerHits = new Collider[16];
+
         bool BodyFits(Vector3 feet)
         {
             float radius = _settings.AgentRadius;
             // A esfera de baixo começa acima do degrau: obstáculos menores que ele dão para subir.
             var bottom = feet + Vector3.up * (_settings.StepHeight + radius);
             var top = feet + Vector3.up * Mathf.Max(_settings.AgentHeight - radius, _settings.StepHeight + radius);
-            return !Physics.CheckCapsule(bottom, top, radius, _settings.ObstacleMask, QueryTriggerInteraction.Ignore);
+            if (Physics.CheckCapsule(bottom, top, radius, _settings.ObstacleMask, QueryTriggerInteraction.Ignore)) return false;
+
+            // Na layer Enemy, inimigo (com Health) não bloqueia: o validador assume que foi derrotado.
+            // O resto dessa layer (alavanca, parede falsa) é sólido.
+            int count = Physics.OverlapCapsuleNonAlloc(bottom, top, radius, EnemyLayerHits, _settings.EnemyLayerMask, QueryTriggerInteraction.Ignore);
+            for (int i = 0; i < count; i++)
+                if (!EnemyLayerHits[i].GetComponentInParent<Inanna.Combat.Health>()) return false;
+            return true;
         }
 
         bool InBounds(int x, int z) => x >= 0 && x < _width && z >= 0 && z < _depth;

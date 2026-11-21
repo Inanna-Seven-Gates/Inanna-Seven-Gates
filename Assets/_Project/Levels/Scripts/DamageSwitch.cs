@@ -12,18 +12,21 @@ namespace Inanna.Levels
     /// Para os ataques do player acharem o gatilho, ele precisa de um Collider na layer que eles procuram (hoje, Enemy).
     /// </summary>
     [DisallowMultipleComponent]
-    public class DamageSwitch : MonoBehaviour, IDamageable
+    public class DamageSwitch : MonoBehaviour, IDamageable, ISwitch
     {
         [Tooltip("Componentes que implementam IActivatable (ex.: Drawbridge).")]
         [SerializeField] MonoBehaviour[] targets = Array.Empty<MonoBehaviour>();
         [Tooltip("Dano mínimo para acionar.")]
         [SerializeField, Min(0f)] float minimumDamage = 0.01f;
+        [Tooltip("Design: só o bumerangue deve alcançar (ex.: alavanca do outro lado do rio). O validador avisa se der no corpo a corpo.")]
+        [SerializeField] bool rangedOnly;
         [SerializeField] UnityEvent onActivated = new UnityEvent();
 
         /// <summary>Disparado sempre que o estado muda (true = acionado).</summary>
         public event Action<bool> StateChanged;
 
         public bool IsActivated { get; private set; }
+        public bool RangedOnly => rangedOnly;
 
         /// <summary>Depois de acionado, o gatilho deixa de ser alvo.</summary>
         public bool IsDead => IsActivated;
