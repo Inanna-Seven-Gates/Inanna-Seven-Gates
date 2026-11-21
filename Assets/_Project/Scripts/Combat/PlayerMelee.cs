@@ -8,18 +8,18 @@ namespace Inanna.Combat
 {
     /// <summary>
     /// Ataque corpo a corpo do gihar (botão esquerdo).
-    /// Fases: Windup (preparação) → Active (acerta) → Recovery (recuperação).
+    /// - Só ataca se houver pelo menos 1 gihar na mão (GiharLoadout.CanMelee).
+    /// - Ignora o clique enquanto o jogador está mirando o arremesso.
     /// - A direção do golpe é travada na mira no início do swing.
-    /// - Hit em arco (alcance + ângulo), cada alvo é atingido uma vez por golpe.
-    /// - Input buffer: apertar um pouco antes do fim encadeia o próximo golpe.
-    /// - Feedback: hit stop, camera shake e leque visual.
     /// </summary>
     public class PlayerMelee : MonoBehaviour
     {
-        [Header("Referências (auto-preenchidas se vazias)")]
+        [Header("Referências")]
         [SerializeField] PlayerInputReader input;
         [SerializeField] PlayerMotor motor;
         [SerializeField] PlayerAim aim;
+        [SerializeField] GiharLoadout loadout;
+        [SerializeField] GiharThrow thrower;
         [SerializeField] IsometricCameraFollow cameraFollow;
 
         [Header("Alvos")]
@@ -28,7 +28,7 @@ namespace Inanna.Combat
         [Header("Golpe")]
         [SerializeField] float range = 1.2f;
         [Range(30f, 360f)] [SerializeField] float arcAngle = 120f;
-        [SerializeField] float damage = 1f;
+        [SerializeField] float damage = 10f;
         [SerializeField] float knockback = 6f;
 
         [Header("Tempos (segundos)")]
@@ -44,7 +44,7 @@ namespace Inanna.Combat
         [SerializeField] float shakeAmplitude = 0.08f;
         [SerializeField] float shakeDuration = 0.1f;
         [SerializeField] Material swingMaterial;
-        [Tooltip("Altura do leque em relação ao pivô do jogador (negativo = perto dos pés).")]
+        [Tooltip("Altura do leque em relação ao pivô do jogador.")]
         [SerializeField] float swingVisualYOffset = -0.9f;
 
         public bool IsAttacking => _state != State.Idle;
@@ -65,18 +65,23 @@ namespace Inanna.Combat
             if (!input) input = GetComponent<PlayerInputReader>();
             if (!motor) motor = GetComponent<PlayerMotor>();
             if (!aim) aim = GetComponent<PlayerAim>();
+            if (!loadout) loadout = GetComponent<GiharLoadout>();
+            if (!thrower) thrower = GetComponent<GiharThrow>();
             if (!cameraFollow && Camera.main) cameraFollow = Camera.main.GetComponent<IsometricCameraFollow>();
             BuildVisual();
         }
 
+        bool CanMelee => loadout == null || loadout.CanMelee;
+        bool Blocked => thrower != null && thrower.IsAiming;
+
         void Update()
         {
-            if (input.AttackPressed) _bufferedUntil = Time.time + inputBuffer;
+            if (input.AttackPressed && !Blocked) _bufferedUntil = Time.time + inputBuffer;
 
             switch (_state)
             {
                 case State.Idle:
-                    if (Time.time < _bufferedUntil) StartSwing();
+                    if (Time.time < _bufferedUntil && CanMelee && !Blocked) StartSwing();
                     break;
 
                 case State.Windup:
@@ -94,6 +99,15 @@ namespace Inanna.Combat
                     if (Time.time >= _stateEnd) EnterIdle();
                     break;
             }
+        }
+
+        /// <summary>Interrompe o golpe.</summary>
+        public void CancelAttack()
+        {
+            if (_state == State.Idle) return;
+            ShowVisual(false);
+            _bufferedUntil = -1f;
+            EnterIdle();
         }
 
         // ---------------- Estados ----------------
@@ -159,12 +173,10 @@ namespace Inanna.Combat
 
         void OnHitLanded()
         {
-            if (!_shookThisSwing)
-            {
-                _shookThisSwing = true;
-                if (cameraFollow) cameraFollow.Shake(shakeAmplitude, shakeDuration);
-                if (hitStopDuration > 0f && !_hitStopRunning) StartCoroutine(HitStop());
-            }
+            if (_shookThisSwing) return;
+            _shookThisSwing = true;
+            if (cameraFollow) cameraFollow.Shake(shakeAmplitude, shakeDuration);
+            if (hitStopDuration > 0f && !_hitStopRunning) StartCoroutine(HitStop());
         }
 
         IEnumerator HitStop()
@@ -199,7 +211,7 @@ namespace Inanna.Combat
             for (int i = 0; i <= segments; i++)
             {
                 float a = Mathf.Lerp(-half, half, i / (float)segments);
-                verts[i + 1] = new Vector3(Mathf.Sin(a), 0f, Mathf.Cos(a)); // raio 1, escalado depois
+                verts[i + 1] = new Vector3(Mathf.Sin(a), 0f, Mathf.Cos(a));
             }
             for (int i = 0; i < segments; i++)
             {

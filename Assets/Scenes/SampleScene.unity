@@ -448,6 +448,10 @@ GameObject:
   - component: {fileID: 595149772}
   - component: {fileID: 595149780}
   - component: {fileID: 595149779}
+  - component: {fileID: 595149783}
+  - component: {fileID: 595149782}
+  - component: {fileID: 595149781}
+  - component: {fileID: 595149784}
   m_Layer: 10
   m_Name: Inanna
   m_TagString: Untagged
@@ -617,6 +621,8 @@ MonoBehaviour:
   input: {fileID: 0}
   motor: {fileID: 0}
   aim: {fileID: 0}
+  loadout: {fileID: 0}
+  thrower: {fileID: 0}
   cameraFollow: {fileID: 330585549}
   targetMask:
     serializedVersion: 2
@@ -649,6 +655,104 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Inanna.Combat.Health
   maxHealth: 6
   invulnerabilityTime: 0.6
+--- !u!114 &595149781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595149771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06ad217506e8dd40b2b356b7a05d517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Player.PlayerDash
+  input: {fileID: 0}
+  motor: {fileID: 0}
+  melee: {fileID: 0}
+  health: {fileID: 0}
+  distance: 4.5
+  duration: 0.18
+  cooldown: 1
+  enableIFrames: 0
+  iFrameStart: 0
+  iFrameEnd: 0.18
+--- !u!114 &595149782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595149771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcdb70df8cca96440b5bae48a07dcaa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Combat.GiharThrow
+  input: {fileID: 0}
+  aim: {fileID: 0}
+  motor: {fileID: 0}
+  loadout: {fileID: 0}
+  melee: {fileID: 0}
+  cameraFollow: {fileID: 0}
+  cam: {fileID: 0}
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  throwRange: 9
+  maxMarks: 3
+  markClickRadius: 0.4
+  moveSpeedWhileAiming: 0.6
+  giharsPerThrow: 1
+  secondGiharDelay: 0.12
+  throwWithoutMarks: 0
+  speed: 16
+  hitRadius: 0.7
+  baseDamage: 12
+  damageFalloffPerHit: 1
+  minDamage: 1
+  knockback: 4
+  hitOnReturn: 1
+  maxFlightTime: 5
+  catchDistance: 0.8
+  spinSpeed: 1080
+  hitShakeAmplitude: 0.05
+  hitShakeDuration: 0.08
+  overlayMaterial: {fileID: 2100000, guid: 490e5b92be23ee6479a8853f4d1c5870, type: 2}
+  rangeFillColor: {r: 1, g: 1, b: 1, a: 0.1}
+  rangeEdgeColor: {r: 1, g: 1, b: 1, a: 0.45}
+  markColor: {r: 1, g: 0.3, b: 0.2, a: 0.9}
+  markFadeOutTime: 0.12
+  rangeCircleYOffset: -0.9
+  giharVisualPrefab: {fileID: 0}
+  giharMaterial: {fileID: 2100000, guid: 8566c5eccff4ee84fadc78800733baca, type: 2}
+--- !u!114 &595149783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595149771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a291e369c2b5543a14f9c8ef25b686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Combat.GiharLoadout
+  maxGihars: 2
+  showDebugHud: 0
+--- !u!114 &595149784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595149771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d215d9c395bd5e46a241018bcf59861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameLoader
+  player: {fileID: 595149778}
 --- !u!1 &621342073
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10d41aeea4aff34ca41d348cc0da51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inanna.Combat.Health
-  maxHealth: 3
+  maxHealth: 60
   invulnerabilityTime: 0
 --- !u!143 &621342076
 CharacterController:
@@ -1207,7 +1311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10d41aeea4aff34ca41d348cc0da51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inanna.Combat.Health
-  maxHealth: 3
+  maxHealth: 60
   invulnerabilityTime: 0
 --- !u!143 &1207048713
 CharacterController:
@@ -1892,7 +1996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f10d41aeea4aff34ca41d348cc0da51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inanna.Combat.Health
-  maxHealth: 3
+  maxHealth: 60
   invulnerabilityTime: 0
 --- !u!143 &1998730114
 CharacterController:
