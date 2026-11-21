@@ -23,14 +23,14 @@ namespace Inanna.Combat
         }
     }
 
-    /// <summary>Qualquer coisa que pode levar dano.</summary>
+    /// <summary>Qualquer coisa que pode levar dano</summary>
     public interface IDamageable
     {
         bool IsDead { get; }
         void TakeDamage(DamageInfo info);
     }
 
-    /// <summary>Vida genérica. Eventos para HUD, efeitos, morte, etc.</summary>
+    /// <summary>Vida genérica.</summary>
     public class Health : MonoBehaviour, IDamageable
     {
         [SerializeField] float maxHealth = 3f;
@@ -40,6 +40,9 @@ namespace Inanna.Combat
         public float Max => maxHealth;
         public float Current { get; private set; }
         public bool IsDead { get; private set; }
+
+        /// <summary>Quando true, ignora todo dano.</summary>
+        public bool Invulnerable { get; set; }
 
         public event Action<DamageInfo> Damaged;
         public event Action Died;
@@ -52,7 +55,7 @@ namespace Inanna.Combat
 
         public void TakeDamage(DamageInfo info)
         {
-            if (IsDead || Time.time < _invulnerableUntil) return;
+            if (IsDead || Invulnerable || Time.time < _invulnerableUntil) return;
 
             Current = Mathf.Max(0f, Current - info.Amount);
             _invulnerableUntil = Time.time + invulnerabilityTime;
