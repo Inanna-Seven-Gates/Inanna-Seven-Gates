@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Inanna.Levels.EditorTools
@@ -23,6 +24,14 @@ namespace Inanna.Levels.EditorTools
             var transform = controller.transform;
             var originalPosition = transform.position;
             var originalRotation = transform.rotation;
+            // O validador assume inimigos derrotados: tira o corpo deles do caminho durante a caminhada.
+            int enemyLayer = LayerMask.NameToLayer("Enemy");
+            var enemyBodies = Object.FindObjectsByType<Inanna.Combat.Health>(FindObjectsSortMode.None)
+                .Where(h => h.gameObject.layer == enemyLayer)
+                .SelectMany(h => h.GetComponentsInChildren<Collider>())
+                .Where(c => c.enabled)
+                .ToList();
+            foreach (var body in enemyBodies) body.enabled = false;
             try
             {
                 Physics.SyncTransforms();
@@ -46,6 +55,7 @@ namespace Inanna.Levels.EditorTools
             }
             finally
             {
+                foreach (var body in enemyBodies) if (body) body.enabled = true;
                 controller.enabled = false;
                 transform.SetPositionAndRotation(originalPosition, originalRotation);
                 controller.enabled = true;
