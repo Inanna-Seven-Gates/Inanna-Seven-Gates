@@ -42,7 +42,8 @@ namespace Inanna.Levels
 
         void OnTriggerEnter(Collider other)
         {
-            if ((stepMask.value & (1 << other.gameObject.layer)) == 0) return;
+            // O Unity manda avisos de trigger até para componente desligado: ignora.
+            if (!isActiveAndEnabled || (stepMask.value & (1 << other.gameObject.layer)) == 0) return;
             _onTop.Add(other);
             if (_onTop.Count == 1) Press();
         }

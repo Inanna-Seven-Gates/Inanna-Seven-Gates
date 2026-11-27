@@ -43,7 +43,8 @@ namespace Inanna.Levels
 
         void OnTriggerStay(Collider other)
         {
-            if (_spent || (playerMask.value & (1 << other.gameObject.layer)) == 0) return;
+            // O Unity manda avisos de trigger até para componente desligado (ex.: TrapShutdown): ignora.
+            if (!isActiveAndEnabled || _spent || (playerMask.value & (1 << other.gameObject.layer)) == 0) return;
 
             if (IsOnSafeArea(other.bounds.center))
             {

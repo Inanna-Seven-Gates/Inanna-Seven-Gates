@@ -1475,6 +1475,85 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &125706384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 125706385}
+  - component: {fileID: 125706387}
+  - component: {fileID: 125706386}
+  m_Layer: 2
+  m_Name: Corte_20_Escada_Descida_Dir
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &125706385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125706384}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 42.75, y: -2.95, z: -15.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &125706386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125706384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 1537492777}
+  - {fileID: 389216890}
+  - {fileID: 198029367}
+  - {fileID: 966456418}
+  - {fileID: 142012996}
+  - {fileID: 2128018202}
+  - {fileID: 987021209}
+  - {fileID: 1892733138}
+  - {fileID: 990936325}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &125706387
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125706384}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.9, y: 2.1, z: 6.9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &127022893
 GameObject:
   m_ObjectHideFlags: 0
@@ -8099,6 +8178,45 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450816331}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &455168302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 455168303}
+  m_Layer: 0
+  m_Name: Cortes_Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &455168303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455168302}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1304912830}
+  - {fileID: 1003208437}
+  - {fileID: 1871108842}
+  - {fileID: 510200609}
+  - {fileID: 125706385}
+  - {fileID: 954046622}
+  - {fileID: 838343897}
+  - {fileID: 841311595}
+  m_Father: {fileID: 2088456275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457057778
 GameObject:
   m_ObjectHideFlags: 0
@@ -8815,6 +8933,84 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507781280}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &510200608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 510200609}
+  - component: {fileID: 510200611}
+  - component: {fileID: 510200610}
+  m_Layer: 2
+  m_Name: Corte_11_Escada_Subida_Esq
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &510200609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510200608}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -37, y: -2.95, z: -16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &510200610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510200608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 1800208460}
+  - {fileID: 199707733}
+  - {fileID: 151471046}
+  - {fileID: 2078888324}
+  - {fileID: 2016912324}
+  - {fileID: 1201689334}
+  - {fileID: 1553322300}
+  - {fileID: 243879520}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &510200611
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510200608}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.4, y: 2.1, z: 6.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &529708523
 GameObject:
   m_ObjectHideFlags: 0
@@ -13504,6 +13700,102 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838075779}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &838343896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 838343897}
+  - component: {fileID: 838343899}
+  - component: {fileID: 838343898}
+  m_Layer: 2
+  m_Name: Corte_22_Santuario
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &838343897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838343896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: -1.45, z: 45.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838343898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838343896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 170113210}
+  - {fileID: 235202420}
+  - {fileID: 8264369}
+  - {fileID: 1559904717}
+  - {fileID: 1428637125}
+  - {fileID: 244115211}
+  - {fileID: 457057780}
+  - {fileID: 1220206563}
+  - {fileID: 1338147478}
+  - {fileID: 1652049307}
+  - {fileID: 1094712906}
+  - {fileID: 687571267}
+  - {fileID: 400515686}
+  - {fileID: 1302191907}
+  - {fileID: 2001985475}
+  - {fileID: 1238289078}
+  - {fileID: 226159692}
+  - {fileID: 631499490}
+  - {fileID: 1528608741}
+  - {fileID: 659322776}
+  - {fileID: 2024414063}
+  - {fileID: 800735081}
+  - {fileID: 585877750}
+  - {fileID: 1013738150}
+  - {fileID: 1571963442}
+  - {fileID: 579265788}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &838343899
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838343896}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 25.9, y: 2.1, z: 29.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &840306726
 GameObject:
   m_ObjectHideFlags: 0
@@ -13616,6 +13908,78 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 840306726}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &841311594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 841311595}
+  - component: {fileID: 841311597}
+  - component: {fileID: 841311596}
+  m_Layer: 2
+  m_Name: Corte_23_Arco_Portao3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &841311595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841311594}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5, y: -1.45, z: 61.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &841311596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841311594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 1338147478}
+  - {fileID: 579265788}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &841311597
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841311594}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.4, y: 2.1, z: 3.599997}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &854343647
 GameObject:
   m_ObjectHideFlags: 0
@@ -15287,6 +15651,98 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946806278}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &954046621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 954046622}
+  - component: {fileID: 954046624}
+  - component: {fileID: 954046623}
+  m_Layer: 2
+  m_Name: Corte_21_Escada_Santuario
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &954046622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954046621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5, y: -1.45, z: 27.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &954046623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954046621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 170113210}
+  - {fileID: 235202420}
+  - {fileID: 8264369}
+  - {fileID: 1968922813}
+  - {fileID: 1559904717}
+  - {fileID: 1428637125}
+  - {fileID: 457057780}
+  - {fileID: 1470863673}
+  - {fileID: 1220206563}
+  - {fileID: 617459065}
+  - {fileID: 218251650}
+  - {fileID: 2052198084}
+  - {fileID: 936906753}
+  - {fileID: 926536284}
+  - {fileID: 1652049307}
+  - {fileID: 1094712906}
+  - {fileID: 687571267}
+  - {fileID: 400515686}
+  - {fileID: 1302191907}
+  - {fileID: 1571963442}
+  - {fileID: 1686578454}
+  - {fileID: 706366074}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &954046624
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954046621}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.4, y: 2.1, z: 7.9}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &958051612
 GameObject:
   m_ObjectHideFlags: 0
@@ -16139,6 +16595,108 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994588216}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1003208436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1003208437}
+  - component: {fileID: 1003208439}
+  - component: {fileID: 1003208438}
+  m_Layer: 2
+  m_Name: Corte_07_Passagem_Inferior_Leste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1003208437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003208436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.75, y: -2.95, z: -20.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1003208438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003208436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 823143629}
+  - {fileID: 495846139}
+  - {fileID: 1819997040}
+  - {fileID: 58529334}
+  - {fileID: 860168608}
+  - {fileID: 687685173}
+  - {fileID: 860572481}
+  - {fileID: 673577885}
+  - {fileID: 170113210}
+  - {fileID: 590734557}
+  - {fileID: 552861875}
+  - {fileID: 1921845918}
+  - {fileID: 1537492777}
+  - {fileID: 389216890}
+  - {fileID: 198029367}
+  - {fileID: 529708525}
+  - {fileID: 375407971}
+  - {fileID: 966456418}
+  - {fileID: 142012996}
+  - {fileID: 2128018202}
+  - {fileID: 987021209}
+  - {fileID: 1892733138}
+  - {fileID: 990936325}
+  - {fileID: 555489420}
+  - {fileID: 296510841}
+  - {fileID: 641545307}
+  - {fileID: 1938783962}
+  - {fileID: 2058962745}
+  - {fileID: 1186865948}
+  - {fileID: 1907601134}
+  - {fileID: 2041272735}
+  - {fileID: 765854618}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &1003208439
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003208436}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 33.9, y: 2.1, z: 3.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1003370209
 GameObject:
   m_ObjectHideFlags: 0
@@ -20734,6 +21292,117 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1302191905}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1304912829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1304912830}
+  - component: {fileID: 1304912832}
+  - component: {fileID: 1304912831}
+  m_Layer: 2
+  m_Name: Corte_06_Passagem_Inferior_Oeste
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1304912830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304912829}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -26, y: -2.95, z: -20.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1304912831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304912829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 823143629}
+  - {fileID: 1520372556}
+  - {fileID: 1990817456}
+  - {fileID: 58529334}
+  - {fileID: 860168608}
+  - {fileID: 1522436935}
+  - {fileID: 788787565}
+  - {fileID: 607834490}
+  - {fileID: 170113210}
+  - {fileID: 590734557}
+  - {fileID: 1408120685}
+  - {fileID: 448608912}
+  - {fileID: 1236090028}
+  - {fileID: 1239322125}
+  - {fileID: 1251117125}
+  - {fileID: 2066138786}
+  - {fileID: 1800208460}
+  - {fileID: 199707733}
+  - {fileID: 944579071}
+  - {fileID: 151471046}
+  - {fileID: 2078888324}
+  - {fileID: 2016912324}
+  - {fileID: 1201689334}
+  - {fileID: 1553322300}
+  - {fileID: 1398407416}
+  - {fileID: 1029720341}
+  - {fileID: 747726983}
+  - {fileID: 1424596468}
+  - {fileID: 1070713807}
+  - {fileID: 1935757905}
+  - {fileID: 572825422}
+  - {fileID: 419152001}
+  - {fileID: 1656336528}
+  - {fileID: 1026986275}
+  - {fileID: 155627455}
+  - {fileID: 745914357}
+  - {fileID: 1683620817}
+  - {fileID: 1152307792}
+  - {fileID: 2061352677}
+  - {fileID: 249087986}
+  - {fileID: 243879520}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &1304912832
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304912829}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 27.4, y: 2.1, z: 3.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1321003868
 GameObject:
   m_ObjectHideFlags: 0
@@ -22027,7 +22696,7 @@ Transform:
   m_GameObject: {fileID: 1439426759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.75, y: -1.75, z: -22.25}
+  m_LocalPosition: {x: 29.78, y: -1.75, z: -22.15}
   m_LocalScale: {x: 34.5, y: 3.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29374,6 +30043,131 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865527426}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1871108841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1871108842}
+  - component: {fileID: 1871108844}
+  - component: {fileID: 1871108843}
+  m_Layer: 2
+  m_Name: Corte_08_Sala_do_Meio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1871108842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871108841}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: -2.95, z: -20.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 455168303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871108843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871108841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2143534ef7a60d42baf1a587f4e1d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inanna.Levels.CutawayZone
+  hiddenWhileInside:
+  - {fileID: 823143629}
+  - {fileID: 1520372556}
+  - {fileID: 495846139}
+  - {fileID: 1990817456}
+  - {fileID: 1819997040}
+  - {fileID: 58529334}
+  - {fileID: 860168608}
+  - {fileID: 1522436935}
+  - {fileID: 687685173}
+  - {fileID: 788787565}
+  - {fileID: 860572481}
+  - {fileID: 607834490}
+  - {fileID: 673577885}
+  - {fileID: 170113210}
+  - {fileID: 590734557}
+  - {fileID: 1408120685}
+  - {fileID: 552861875}
+  - {fileID: 448608912}
+  - {fileID: 1921845918}
+  - {fileID: 1236090028}
+  - {fileID: 1239322125}
+  - {fileID: 1251117125}
+  - {fileID: 2066138786}
+  - {fileID: 944579071}
+  - {fileID: 747726983}
+  - {fileID: 1424596468}
+  - {fileID: 1070713807}
+  - {fileID: 1935757905}
+  - {fileID: 1537492777}
+  - {fileID: 389216890}
+  - {fileID: 198029367}
+  - {fileID: 529708525}
+  - {fileID: 375407971}
+  - {fileID: 2061917043}
+  - {fileID: 2020860795}
+  - {fileID: 1010457690}
+  - {fileID: 1815913917}
+  - {fileID: 572825422}
+  - {fileID: 419152001}
+  - {fileID: 1526145086}
+  - {fileID: 1186865948}
+  - {fileID: 1010645845}
+  - {fileID: 1026986275}
+  - {fileID: 155627455}
+  - {fileID: 994588218}
+  - {fileID: 745914357}
+  - {fileID: 1683620817}
+  - {fileID: 1152307792}
+  - {fileID: 2061352677}
+  - {fileID: 249087986}
+  - {fileID: 1545832588}
+  - {fileID: 1735563766}
+  - {fileID: 910989483}
+  - {fileID: 1274138812}
+  - {fileID: 1847247195}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!65 &1871108844
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871108841}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 24.9, y: 2.1, z: 8.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1892733136
 GameObject:
   m_ObjectHideFlags: 0
@@ -32840,6 +33634,7 @@ Transform:
   - {fileID: 52367377}
   - {fileID: 1707867302}
   - {fileID: 1582311472}
+  - {fileID: 455168303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2102282142
