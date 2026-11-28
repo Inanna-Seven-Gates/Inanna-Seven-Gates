@@ -86,6 +86,11 @@ namespace Inanna.Player
 
         void Update()
         {
+            if (!enabled) return;
+
+            if (_cc == null || !_cc.enabled)
+                return;
+
             if (input.AttackPressed) FaceAimFor(faceAimAfterAttack);
             HandleMovement();
         }

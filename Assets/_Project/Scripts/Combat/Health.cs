@@ -66,8 +66,12 @@ namespace Inanna.Combat
             if (Current <= 0f)
             {
                 IsDead = true;
+                Debug.Log("INANNA MORREU! Evento Died será chamado.");
                 Died?.Invoke();
             }
+
+            Debug.Log($"Inanna recebeu {info.Amount} de dano!");
+            Debug.Log($"Vida atual: {Current}/{maxHealth}");
         }
 
         public void Heal(float amount)

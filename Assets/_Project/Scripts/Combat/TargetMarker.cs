@@ -2,63 +2,6 @@ using UnityEngine;
 
 namespace Inanna.Combat
 {
-    /// <summary>Malhas procedurais planas (no plano XZ) para círculo de alcance e marcadores.</summary>
-    public static class OverlayMeshes
-    {
-        static Mesh _disc, _ring;
-
-        /// <summary>Disco</summary>
-        public static Mesh Disc()
-        {
-            if (_disc) return _disc;
-            const int seg = 48;
-            var v = new Vector3[seg + 2];
-            var t = new int[seg * 3];
-            v[0] = Vector3.zero;
-            for (int i = 0; i <= seg; i++)
-            {
-                float a = i / (float)seg * Mathf.PI * 2f;
-                v[i + 1] = new Vector3(Mathf.Sin(a), 0f, Mathf.Cos(a));
-            }
-            for (int i = 0; i < seg; i++) { t[i * 3] = 0; t[i * 3 + 1] = i + 1; t[i * 3 + 2] = i + 2; }
-            _disc = Build("OverlayDisc", v, t);
-            return _disc;
-        }
-
-        /// <summary>Anel de raio externo raio interno.</summary>
-        public static Mesh Ring(float inner = 0.8f)
-        {
-            if (_ring) return _ring;
-            const int seg = 48;
-            var v = new Vector3[(seg + 1) * 2];
-            var t = new int[seg * 6];
-            for (int i = 0; i <= seg; i++)
-            {
-                float a = i / (float)seg * Mathf.PI * 2f;
-                var dir = new Vector3(Mathf.Sin(a), 0f, Mathf.Cos(a));
-                v[i * 2] = dir;
-                v[i * 2 + 1] = dir * inner;
-            }
-            for (int i = 0; i < seg; i++)
-            {
-                int o0 = i * 2, i0 = i * 2 + 1, o1 = i * 2 + 2, i1 = i * 2 + 3;
-                int k = i * 6;
-                t[k] = o0; t[k + 1] = o1; t[k + 2] = i0;
-                t[k + 3] = i0; t[k + 4] = o1; t[k + 5] = i1;
-            }
-            _ring = Build("OverlayRing", v, t);
-            return _ring;
-        }
-
-        static Mesh Build(string name, Vector3[] v, int[] t)
-        {
-            var m = new Mesh { name = name, vertices = v, triangles = t };
-            m.RecalculateNormals();
-            m.RecalculateBounds();
-            return m;
-        }
-    }
-
     /// <summary>
     /// Anel no chão sob um inimigo marcado.
     /// </summary>
